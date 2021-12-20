@@ -67,6 +67,18 @@ afterEvaluate {
                         developerConnection = 'scm:git:ssh://github.com/piterrus0102/TestLibraryInMaven.git'
                         url = 'https://github.com/piterrus0102/TestLibraryInMaven'
                     }
+                    repositories {
+                        maven {
+                            // change URLs to point to your repos, e.g. http://my.org/repo
+                            //def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
+                            //def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
+                            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+                            credentials {
+                                username = rootProject.ext['ossrhUsername']
+                                password = rootProject.ext['ossrhPassword']
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -74,10 +86,9 @@ afterEvaluate {
 }
 
 signing {
-    useInMemoryPgpKeys(
-            rootProject.ext["signing.keyId"],
-            rootProject.ext["signing.key"],
-            rootProject.ext["signing.password"],
-    )
+
+    rootProject.ext["signing.keyId"]
+    rootProject.ext["signing.secretKeyRingFile"]
+    rootProject.ext["signing.password"]
     sign publishing.publications
 }

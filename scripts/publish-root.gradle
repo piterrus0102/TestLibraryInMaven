@@ -19,15 +19,15 @@ if (secretPropsFile.exists()) {
     ext["sonatypeStagingProfileId"] = System.getenv('SONATYPE_STAGING_PROFILE_ID')
     ext["signing.keyId"] = System.getenv('SIGNING_KEY_ID')
     ext["signing.password"] = System.getenv('SIGNING_PASSWORD')
-    ext["signing.key"] = System.getenv('SIGNING_KEY')
+    ext["signing.secretKeyRingFile"] = System.getenv('SIGNING_KEY')
 }
 
 nexusPublishing {
     repositories {
         sonatype {
-            stagingProfileId = sonatypeStagingProfileId
-            username = ossrhUsername
-            password = ossrhPassword
+            stagingProfileId = "5f6897eb7a6eff"//sonatypeStagingProfileId
+            username = "piterrus"//ossrhUsername
+            password = "SiMiLaR123!@#"//ossrhPassword
             nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
             snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
         }
